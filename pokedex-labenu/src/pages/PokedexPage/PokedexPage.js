@@ -1,12 +1,12 @@
-import Header from "../components/headers/Headers";
+import Headers from "../../components/headers/Headers"
 
 function PokedexPage() {
   return (
-    <div>
-      <Header />
+    <>
+      <Headers />
       <h1>PokedexPage</h1>
       <button>Click aqui</button>
-    </div>
+    </>
   );
 }
 

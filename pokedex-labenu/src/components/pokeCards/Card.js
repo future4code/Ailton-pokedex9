@@ -1,16 +1,15 @@
-import { useNavigate } from "react-router-dom";
-import { goToDetailPage } from "../../routes/Direction";
+// import { useNavigate } from "react-router-dom";
 
 function PokeCard(props) {
-    const navigate = useNavigate();
-    const {id, name} = props.pokemon;
+    // const navigate = useNavigate();
+    // const {id, name} = props.pokemon;
 
     return ( 
     <section>
-        <span>Nº:{id}</span>
-        <span>{name.toUpperCase()} - </span>        
+        <span>Nº:{props.id}</span>
+        <span>{props.name.toUpperCase()} - </span>        
         <button>Capturar!</button>
-        <button onClick={() => goToDetailPage(navigate, name)}>Detalhes</button>
+        {/* <button onClick={() => goToDetailPage(navigate, name)}>Detalhes</button> */}
         
     </section>
     )
