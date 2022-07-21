@@ -1,1 +1,1 @@
-export const initial_url = 'https://pokeapi.co/api/v2/pokemon/?offset=0&limit=20'
+export const base_url = 'https://pokeapi.co/api/v2/pokemon'
