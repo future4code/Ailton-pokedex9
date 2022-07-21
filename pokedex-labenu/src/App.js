@@ -1,4 +1,5 @@
 import React from 'react'
+import { GlobalState } from './global/GlobalState';
 import GlobalStyle from './globalStyles'
 import { Router } from './routes/Router'
 
@@ -7,7 +8,9 @@ function App() {
   return (
     <div>
       <GlobalStyle />
-      <Router />
+      <GlobalState>
+        <Router />
+      </GlobalState>
     </div>
   );
 }
