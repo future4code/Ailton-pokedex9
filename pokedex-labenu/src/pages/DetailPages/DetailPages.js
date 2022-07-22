@@ -1,6 +1,7 @@
 import Headers from "../../components/headers/Headers"
 import { useParams } from 'react-router-dom'
 import { useRequestData } from '../../hooks/requestData/requestData'
+import { renderType } from '../../components/renderType/renderType'
 
 function DetailPages() {
 
@@ -8,7 +9,9 @@ function DetailPages() {
 
   const [pokeDetails] = useRequestData(params.name)
 
+  let totalStats = 0
   const renderStats = pokeDetails && pokeDetails.stats.map((status) => {
+    totalStats = totalStats + Number(status.base_stat)
     return <li>{status.stat.name} - {status.base_stat}</li>
   })
   
@@ -25,12 +28,19 @@ function DetailPages() {
 
         <h3># {pokeDetails && pokeDetails.id}</h3>
         <h2>{pokeDetails && pokeDetails.name}</h2>
-        <p>{pokeDetails && pokeDetails.types[0].type.name} {pokeDetails && pokeDetails.types[1] && pokeDetails.types[1].type.name}</p>
 
-        <img src={pokeDetails && pokeDetails.sprites.other.dream_world.front_default} />
+        <div>
+          {pokeDetails && renderType(pokeDetails.types[0].type.name)}
+          {pokeDetails && pokeDetails.types[1] && renderType(pokeDetails.types[1].type.name)}       
+        </div>
+
+        <img
+          src={pokeDetails && pokeDetails.sprites.other.dream_world.front_default}
+          alt={pokeDetails && pokeDetails.name}
+        />
         
-        <img src={pokeDetails && pokeDetails.sprites.front_default}/> 
-        <img src={pokeDetails && pokeDetails.sprites.back_default}/>
+        <img src={pokeDetails && pokeDetails.sprites.front_default} alt={`${pokeDetails && pokeDetails.name} sprite frente`} /> 
+        <img src={pokeDetails && pokeDetails.sprites.back_default} alt={`${pokeDetails && pokeDetails.name} sprite costas`} />
 
         <h4>Moves</h4>
         <ul>
@@ -43,6 +53,7 @@ function DetailPages() {
         <h4>Base Stats</h4>
         <ul>
           {renderStats}
+          <li>total - {totalStats}</li>  
         </ul>
       </main>
       
