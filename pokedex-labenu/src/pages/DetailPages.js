@@ -96,8 +96,8 @@ padding: 4px 10px;
 position: absolute;
 width: 287px;
 height: 74px;
-left: 1440px;
-top: 41px;
+left: 70%;
+top: 20%;
 
 background: #33A4F5;
 border-radius: 8px;
