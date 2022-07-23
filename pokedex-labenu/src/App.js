@@ -1,17 +1,19 @@
-import React from 'react'
+import Router from './routes/Router';
 import { GlobalState } from './global/GlobalState';
-import GlobalStyle from './globalStyles'
-import { Router } from './routes/Router'
+import React from 'react';
+// import GlobalStyle from './globalStyles';
 
 
 function App() {
+
+
   return (
-    <div>
-      <GlobalStyle />
+    <di>
+      {/* < GlobalStyle /> */}
       <GlobalState>
         <Router />
       </GlobalState>
-    </div>
+    </di>
   );
 }
 

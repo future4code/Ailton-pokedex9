@@ -16,6 +16,7 @@ left: 820px;
 top: 21px;
 `
 
+
 export const Button = styled.div`
 display: flex;
 flex-direction: row;
@@ -24,9 +25,6 @@ align-items: center;
 padding: 4px 10px;
 &:hover{
     cursor: pointer;
-    background-color: lightblue;
-    border-radius: 24px;
-    color: lightblue;
 }
 
 
