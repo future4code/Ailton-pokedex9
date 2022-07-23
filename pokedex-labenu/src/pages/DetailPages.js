@@ -1,7 +1,5 @@
 import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
 import styled from 'styled-components';
 import logo from "../img/Logo.png";
 import { ContainerHome } from "./styled";
@@ -98,8 +96,8 @@ padding: 4px 10px;
 position: absolute;
 width: 287px;
 height: 74px;
-left: 1440px;
-top: 41px;
+left: 70%;
+top: 20%;
 
 background: #33A4F5;
 border-radius: 8px;
@@ -129,26 +127,15 @@ const Detalhes = () => {
 
     const history = useHistory()
     const params = useParams()
-    const [pokemon, setPokemon] = useState()
-    const [pokeDetails] = useRequestData(params.name)
+    const [pokeDetails] = useRequestData(params.pokemon)
+
+    console.log(params.pokemon)
 
     let totalStats = 0
     const renderStats = pokeDetails && pokeDetails.stats.map((status) => {
         totalStats = totalStats + Number(status.base_stat)
         return <li>{status.stat.name} - {status.base_stat}</li>
     })
-
-
-
-    useEffect(() => {
-        axios.get(`https://pokeapi.co/api/v2/pokemon/${params.pokemon}`)
-            .then((res) => {
-                setPokemon(res.data)
-            })
-            .catch((err) => {
-                alert(err)
-            })
-    }, [])
 
     const goToHome = () => {
         history.push(`/`)
@@ -159,15 +146,7 @@ const Detalhes = () => {
     }
 
 
-    if (pokemon) {
-
-        const types = pokemon.types.map((item) => {
-            return (<p>
-                {item.type.name}
-            </p>)
-        })
-
-        console.log(pokemon);
+    if (pokeDetails) {
         return (
             <Container >
                 <Header>
@@ -180,19 +159,19 @@ const Detalhes = () => {
                     </PokeP></Pokedex>
                 </Header>
 
-                <ContainerHome key={pokemon.id}>
+                <ContainerHome key={pokeDetails.id}>
                     <DataContainer>
                         <NamePokemon>
                             <h3># {pokeDetails && pokeDetails.id}</h3>
-                            <h1>{pokemon.name.toUpperCase()}</h1>
+                            <h1>{pokeDetails.name.toUpperCase()}</h1>
                             <div>
                                 {pokeDetails && renderType(pokeDetails.types[0].type.name)}
                                 {pokeDetails && pokeDetails.types[1] && renderType(pokeDetails.types[1].type.name)}
                             </div>
                             
                             <div className='images'>
-                                <img src={pokemon.sprites.front_default} alt={`${pokemon.name} de frente`} />
-                                <img src={pokemon.sprites.back_default} alt={`${pokemon.name} de costas`} />
+                                <img src={pokeDetails.sprites.front_default} alt={`${pokeDetails.name} de frente`} />
+                                <img src={pokeDetails.sprites.back_default} alt={`${pokeDetails.name} de costas`} />
                             </div>
                             <h4>Moves</h4>
                             <ul>
