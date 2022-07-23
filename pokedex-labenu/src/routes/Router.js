@@ -1,16 +1,31 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import ListPage from '../pages/ListPage/ListPage'
-import PokedexPage from '../pages/PokedexPage/PokedexPage'
-import DetailPages from '../pages/DetailPages/DetailPages'
+import ListPage from "../pages/ListPage";
+import Pokedex from "../pages/PokedexPage";
+import Details from "../pages/DetailPages";
 
-export const Router = () => {
-    return (
-        <BrowserRouter>
-            <Routes>
-                <Route index element={<ListPage />} />
-                <Route path="/pokedex" element={<PokedexPage />} />
-                <Route path="/pokemon/:name" element={<DetailPages />} />
-            </Routes>
-        </BrowserRouter>
-    )
-}
+import {
+  BrowserRouter,
+  Switch,
+  Route,
+} from "react-router-dom/cjs/react-router-dom.min";
+
+const Router = () => {
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route exact path={"/"}> 
+          <ListPage />
+        </Route>
+
+        <Route exact path={"/detalhes/:pokemon"}>
+          <Details />
+        </Route>
+
+        <Route exact path={"/pokedex"}>
+          <Pokedex />
+        </Route>
+      </Switch>
+    </BrowserRouter>
+  );
+};
+
+export default Router;

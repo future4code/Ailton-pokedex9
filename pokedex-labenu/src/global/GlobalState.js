@@ -1,37 +1,45 @@
-import React, { useState } from "react";
-import PokemonContext from "./Context";
-import { useRequestData } from '../hooks/requestData/requestData'
+import React from "react";
+import Context from "./Context";
+import axios from "axios";
+import { useState } from "react";
 
 export const GlobalState = (props) => {
 
-    const [pokemonList, isLoadingList, errorList] = useRequestData('?offset=0&limit=20')
-    const [page, setPage] = useState(1) //Acho que não precisa, pq tem o Router
+    const [pokemon, setPokemon] = useState([])
+    const [page, setPage] = useState(1)
     const [offset, setOffset] = useState()
     const [pokedex, setPokedex] = useState([])
-    
+
+    const getPokemon = () => {
+        axios.get(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=20`)
+            .then((response) => {
+                setPokemon(response.data.results)
+            })
+            .catch((err) => {
+                alert(err)
+            })
+    }
     const states = {
-        pokemonList,
-        isLoadingList,
-        errorList,
+        pokemon,
         page,
         offset,
         pokedex
     }
 
     const setters = {
+        setPokemon,
         setPage,
         setOffset,
         setPokedex
     }
 
-    const values = {
-        states,
-        setters
+    const getters = {
+        getPokemon
     }
 
     return (
-        <PokemonContext.Provider value={ values }>
+        <Context.Provider value={{ states, setters, getters }}>
             {props.children}
-        </PokemonContext.Provider>
+        </Context.Provider>
     )
 } 

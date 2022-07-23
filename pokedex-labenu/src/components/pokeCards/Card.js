@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useRequestData } from '../../hooks/requestData/requestData'
 import { goToDetailPage } from '../../routes/coordinator'
 import { renderType } from '../renderType/renderType'
+import { Pokemon, ContainerPlanta, CardContainer} from './styled'
 
 
 function PokeCard(props) {
@@ -10,17 +11,25 @@ function PokeCard(props) {
     const [pokeDetails] = useRequestData(props.name)
 
     return (
+        <CardContainer>
         <section>
-            <span>Nº:{pokeDetails && pokeDetails.id}</span>
+           <ContainerPlanta> <span>Nº:{pokeDetails && pokeDetails.id}</span>
             <span>{pokeDetails && pokeDetails.name.toUpperCase()} - </span> 
-            <img src={pokeDetails && pokeDetails.sprites.other.dream_world.front_default}/>   
+            
+            <Pokemon><img src={pokeDetails && pokeDetails.sprites.other.dream_world.front_default}/>  </Pokemon>
+             
             <span>
                 {pokeDetails && renderType(pokeDetails.types[0].type.name)}
                 {pokeDetails && pokeDetails.types[1] && renderType(pokeDetails.types[1].type.name)}
-            </span>    
+            </span>   
+            
+            
             <button>Capturar!</button>
             <button onClick={() => goToDetailPage(navigate, props.name)}>Detalhes</button>
+            </ContainerPlanta> 
+           
         </section>
+        </CardContainer>
     )
 }
 
