@@ -24,7 +24,7 @@
 
 - Detalhes
     - Header contendo o logo de Pokemon, um link à esquerda que direciona para a página inicial e um botão à direita que direciona para a página da Pokedex;
-    - Visualização de um Card contendo detalhes do pokemon escolhido: número, nome, imagens dos sprites, tipo(s), base stats (hp, attack, defense, sp. attack, ap. defense, speed e total) e moves (quatro primeiros da lista).
+    - Visualização de um Card contendo detalhes do pokemon escolhido: número, nome, imagens dos sprites, tipo(s), base stats (hp, attack, defense, sp. attack, sp. defense, speed e total) e moves (quatro primeiros da lista).
 
 ### O que não funciona: 
 - Funcionalidades 2, 3 e 4 do desafio.
