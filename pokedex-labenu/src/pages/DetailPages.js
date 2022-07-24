@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { withTheme } from 'styled-components';
 import logo from "../img/Logo.png";
 import { ContainerHome } from "./styled";
 import Fundo from '../img/Fundo.jpg';
@@ -64,10 +64,16 @@ text-transform: uppercase;
     margin: 0;
     padding: 0;
     height: 70%;
+    width: 50%;
+    
     img{
-        height: 100%;
+        height: 75%;
     }
 }
+`
+
+const Imagens = styled.div`
+height: 250px; 
 `
 
 const DataContainer = styled.div` 
@@ -120,7 +126,92 @@ order: 0;
 flex-grow: 0;
 `
 
+const MoveFundos = styled.li`
+position: relative;
+width: 292px;
+height: 700px;
+left: 450px;
+top: -135px;
+background: #FFFFFF;
+border-radius: 8px;
+border: 5px solid black;
+`
 
+const State = styled.ul`
+width: 162px;
+height: 109px;
+
+font-family: 'Montserrat';
+font-weight: 300;
+font-size: 14px;
+line-height: 25px;
+/* identical to box height */
+
+color: #000000;
+
+/* Inside auto layout */
+
+flex: none;
+order: 0;
+flex-grow: 0;
+`
+
+const Moves = styled.div`
+position: relative;
+width: 87px;
+height: 100px;
+left: 100px;
+top: -20px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 800;
+font-size: 24px;
+line-height: 29px;
+color: #000000;
+`
+//======================================================================
+const BaseState = styled.div`
+        position: relative;
+    width: 292px;
+    height: 409px;
+    left: -433px;
+    top: -418px;
+    background: #FFFFFF;
+    border-radius: 8px;
+    border: 5px solid black;
+`
+const Base= styled.div`
+position: relative;
+width: 87px;
+height: 100px;
+left: 100px;
+top: -20px;
+
+font-family: 'Inter';
+font-style: normal;
+font-weight: 800;
+font-size: 24px;
+line-height: 29px;
+color: #000000;
+`
+const BaseAtaks= styled.ul`
+width: 162px;
+height: 150px;
+font-family: 'Montserrat';
+font-weight: 300;
+font-size: 11px;
+line-height: 22px;
+/* identical to box height */
+
+color: #000000;
+
+/* Inside auto layout */
+
+flex: none;
+order: 0;
+flex-grow: 0;
+`
 
 const Detalhes = () => {
 
@@ -169,22 +260,22 @@ const Detalhes = () => {
                                 {pokeDetails && pokeDetails.types[1] && renderType(pokeDetails.types[1].type.name)}
                             </div>
                             
-                            <div className='images'>
+                            <div className='images'><Imagens>
                                 <img src={pokeDetails.sprites.front_default} alt={`${pokeDetails.name} de frente`} />
                                 <img src={pokeDetails.sprites.back_default} alt={`${pokeDetails.name} de costas`} />
-                            </div>
-                            <h4>Moves</h4>
-                            <ul>
-                                <li>{pokeDetails && pokeDetails.moves[0].move.name}</li>
+                                </Imagens>  </div>
+                            <MoveFundos><Moves> <h5>Moves</h5></Moves>
+                          <State><ul>                               
+                                <li> {pokeDetails && pokeDetails.moves[0].move.name}</li>
                                 <li>{pokeDetails && pokeDetails.moves[1].move.name}</li>
                                 <li>{pokeDetails && pokeDetails.moves[2].move.name}</li>
                                 <li>{pokeDetails && pokeDetails.moves[3].move.name}</li>
-                            </ul>
-                            <h4>Base Stats</h4>
-                            <ul>
+                            </ul></State></MoveFundos>
+                           <BaseState><Base><h5>Base Stats</h5></Base>
+                           <BaseAtaks><ul>
                                 {renderStats}
-                                <li>total - {totalStats}</li>
-                            </ul>
+                               <li>total - {totalStats}</li>
+                            </ul></BaseAtaks> </BaseState> 
                         </NamePokemon>
 
                     </DataContainer>
