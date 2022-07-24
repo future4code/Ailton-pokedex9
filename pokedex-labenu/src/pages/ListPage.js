@@ -62,6 +62,36 @@ flex: none;
 order: 0;
 flex-grow: 0;
 `
+const Pages = styled.div`
+width: 100%;
+display: flex;
+justify-content: space-between;
+padding: 4px;
+flex-wrap: wrap;
+background: whitesmoke;
+`
+const PagesIndex = styled.button`
+border: none;
+background-color: transparent;
+color: #33A4F5;
+margin: 20px 4px 8px 4px;
+&:hover{
+    cursor: pointer;
+    font-weight: bold;
+}
+`
+
+const CurrentPage = styled.button`
+border: none;
+background-color: transparent;
+color: black;
+margin: 20px 4px 8px 4px;
+font-weight: bold;
+font-size: medium;
+&:hover{
+    cursor: pointer;   
+}
+`
 
 const Home = () => {
     const { states, setters, getters } = useContext(PokemonContext)
@@ -77,11 +107,25 @@ const Home = () => {
     const history = useHistory()
 
     const goToPokedex = () => {
-        history.push(`/pokedex`)
-    }
+            history.push(`/pokedex`)
+        }
 
+    const pokemonPerPage = 20
+    const totalPages = Math.ceil(pokemon.length / pokemonPerPage)
+    const startIndex = page * pokemonPerPage
+    const endIndex = startIndex + pokemonPerPage
+    const currentPokemon = pokemon.slice(startIndex, endIndex)
 
-    const cardsPoke = pokemon.filter((poke) => {
+    const pages = Array.from(Array(totalPages), (item, index) => {
+        if (index === page) {
+            return <CurrentPage key={index} onClick={() => setPage(index)}>{index + 1}</CurrentPage>
+        } else {
+            return <PagesIndex key={index} onClick={() => setPage(index)}>{index + 1}</PagesIndex>
+        }
+        
+    })
+
+    const cardsPoke = currentPokemon.filter((poke) => {
         return (!pokedex.some(e => e.url === poke.url))
     })
         .map((poke) => {
@@ -90,24 +134,26 @@ const Home = () => {
             )
         })
 
-    const handleChange = (event, value) => {
-        setPage(value)
-        setOffset((value - 1) * 20)
-    }
 
     if (pokemon.length !== 0) {
         return <Container>
             <Header>
                 <img src={logo} alt="Logotipo pokemon" />
-                <Pokedex onClick={goToPokedex}><PokeP>
-                     Pokedex
+                <Pokedex onClick={goToPokedex}>
+                    <PokeP>
+                        Pokedex
                     </PokeP>
                 </Pokedex>
             </Header>
+
             <ContainerHome>
                 {cardsPoke}
             </ContainerHome>
-                    </Container>;
+
+            <Pages>
+                {pages}
+            </Pages>
+        </Container>;
     } else {
         return (
             <Container>

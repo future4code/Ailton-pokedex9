@@ -6,12 +6,12 @@ import { useState } from "react";
 export const GlobalState = (props) => {
 
     const [pokemon, setPokemon] = useState([])
-    const [page, setPage] = useState(1)
-    const [offset, setOffset] = useState()
+    const [page, setPage] = useState(0)
+    const [offset, setOffset] = useState(0)
     const [pokedex, setPokedex] = useState([])
 
     const getPokemon = () => {
-        axios.get(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=20`)
+        axios.get(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=649`)
             .then((response) => {
                 setPokemon(response.data.results)
             })
@@ -19,6 +19,7 @@ export const GlobalState = (props) => {
                 alert(err)
             })
     }
+
     const states = {
         pokemon,
         page,

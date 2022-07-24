@@ -73,7 +73,7 @@ text-transform: uppercase;
 `
 
 const Imagens = styled.div`
-height: 250px; 
+height: auto; 
 `
 
 const DataContainer = styled.div` 
@@ -85,7 +85,7 @@ box-shadow: 1px 0px 3px 0px #ffc222;
 border-radius: 20px;
 margin: 20px;
 width: 90vw;
-min-height: 60vh;
+min-height: 70vh;
 display: flex;
 flex-direction: column;
 h2{
@@ -196,7 +196,7 @@ line-height: 29px;
 color: #000000;
 `
 const BaseAtaks= styled.ul`
-width: 162px;
+width: 172px;
 height: 150px;
 font-family: 'Montserrat';
 font-weight: 300;
@@ -219,8 +219,6 @@ const Detalhes = () => {
     const history = useHistory()
     const params = useParams()
     const [pokeDetails] = useRequestData(params.pokemon)
-
-    console.log(params.pokemon)
 
     let totalStats = 0
     const renderStats = pokeDetails && pokeDetails.stats.map((status) => {
